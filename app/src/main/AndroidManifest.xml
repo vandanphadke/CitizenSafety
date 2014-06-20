@@ -26,6 +26,10 @@
             android:name="com.HumanFirst.safe.app.SOSActivity"
             android:label="@string/title_activity_sos" >
         </activity>
+        <activity
+            android:name="com.HumanFirst.safe.app.ContactsList"
+            android:label="@string/title_activity_contacts_list" >
+        </activity>
     </application>
 
     <uses-permission android:name="android.permission.READ_CONTACTS" />

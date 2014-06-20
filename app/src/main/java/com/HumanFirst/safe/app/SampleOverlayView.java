@@ -1,15 +1,13 @@
 package com.HumanFirst.safe.app;
 
-import android.app.AlertDialog;
-import android.content.Intent;
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.os.Handler;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.TextView;
-import android.widget.Toast;
 
 
 /**
@@ -19,6 +17,11 @@ public class SampleOverlayView extends OverlayView{
     private ImageButton imgb ;
     long lastDown  = 0 ;
     long lastDuration = 0 ;
+    Handler handler ;
+    Runnable call ;
+
+    // GPSTracker class
+    GPSTracker gps;
 
     public SampleOverlayView(OverlayService service) {
         super(service, R.layout.overlay, 1);
@@ -28,9 +31,14 @@ public class SampleOverlayView extends OverlayView{
         return Gravity.TOP + Gravity.RIGHT;
     }
 
+
     @Override
     protected void onInflateView() {
         imgb = (ImageButton) this.findViewById(R.id.imgbutton);
+
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences("GPS-Coordinates" , Context.MODE_PRIVATE);
+        final SharedPreferences.Editor editor = sharedPreferences.edit();
+
 
         imgb.setOnClickListener(new OnClickListener() {
             @Override
@@ -66,7 +74,50 @@ public class SampleOverlayView extends OverlayView{
             }
         });
 
+        final Handler handler = new Handler();
+        final Runnable call = new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    //Code to update GPS Position after regular intervals of time
+                    //Also call the same handler here
+                    Log.v("Updating Coordinates" , "Updating Coordinates");
+                    // create class object
+                    gps = new GPSTracker(getContext());
+
+                    // check if GPS enabled
+                    if (!gps.canGetLocation()) {
+                        // can't get location
+                        // GPS or Network is not enabled
+                        // Here GPS settings have to be turned on programatically and then the location has to be taken
+
+                    }
+
+                    //Check if the current latitudes and longitudes are obtaines correctly(Non-Zero)
+                    double latitude = 0 ;
+                    double longitude = 0 ;
+
+                    while (latitude == 0 && longitude == 0 ) {
+
+                        latitude = gps.getLatitude();
+                        longitude = gps.getLongitude();
+                        Log.d("App" , "Still in loop");
+
+                    }
+                    //Write these values in the sharedpreferences
+                    editor.putFloat("GPS-lat" , (float) latitude);
+                    editor.putFloat("GPS-long" , (float) longitude);
+                    Log.d("Sharedprefs updated" , "" + latitude + longitude);
+
+                    handler.postDelayed(this , 10000);
+
+                }catch (Exception e){e.printStackTrace();}
+            }
+        };
+        handler.postDelayed(call , 10000);
     }
+
+    protected Handler getThread(){return handler;}
 
     @Override
     protected void refreshViews() {

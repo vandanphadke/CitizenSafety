@@ -5,7 +5,9 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
-//This activity will be called only if an emergency is detected .
+/*This activity will be called only if an emergency is detected .
+
+*/
 public class SOSActivity extends ActionBarActivity {
 
     @Override

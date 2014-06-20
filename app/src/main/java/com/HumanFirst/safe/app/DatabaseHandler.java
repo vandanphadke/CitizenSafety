@@ -32,8 +32,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
 
 
-    public DatabaseHandler(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
-        super(context, name, factory, version);
+    public DatabaseHandler(Context context, SQLiteDatabase.CursorFactory factory, int version) {
+        super(context, DATABASE_NAME, factory, version);
     }
 
     @Override

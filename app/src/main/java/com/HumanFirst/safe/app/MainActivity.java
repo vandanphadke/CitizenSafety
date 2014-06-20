@@ -1,12 +1,8 @@
 package com.HumanFirst.safe.app;
 
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
-import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
+import android.net.Uri;
 import android.provider.ContactsContract;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -24,11 +20,42 @@ public class MainActivity extends ActionBarActivity{
 
     Button getgpsloc ;
     Button addcontacts ;
+    Button seeContacts ;
     ToggleButton onoff ;
 
 
     // GPSTracker class
     GPSTracker gps;
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(data != null) {
+            Uri uri = data.getData();
+            if (uri != null){
+                Cursor c = null ;
+                try {
+                    c = getContentResolver().query(uri, new String[]{ContactsContract.CommonDataKinds.Phone.NUMBER,
+                            ContactsContract.CommonDataKinds.Phone.TYPE , ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME}, null, null, null);
+
+                    if (c != null && c.moveToFirst()){
+                        String number = c.getString(0);
+                        int type = c.getInt(1);
+                        String name = c.getString(2);
+                        Toast.makeText(this ,type + ":" + number + ":" + name,Toast.LENGTH_LONG).show();
+
+                        //Save contact to database
+
+
+                    }
+
+                }finally {
+                    if (c != null)
+                        c.close();
+                }
+            }
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,11 +65,13 @@ public class MainActivity extends ActionBarActivity{
         getgpsloc = (Button) findViewById(R.id.getgpsloc);
         onoff = (ToggleButton) findViewById(R.id.onoffbutton);
         addcontacts = (Button)findViewById(R.id.addcontacts);
+        seeContacts = (Button)findViewById(R.id.seeContacts);
+
 
         addcontacts.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+                Intent intent = new Intent(Intent.ACTION_PICK);
                 intent.setType(ContactsContract.CommonDataKinds.Phone.CONTENT_TYPE);
                 startActivityForResult(intent, 1);
             }
@@ -70,8 +99,6 @@ public class MainActivity extends ActionBarActivity{
                     // Ask user to enable GPS/network in settings
                     gps.showSettingsAlert();
                 }
-
-
             }
         });
 
@@ -86,7 +113,15 @@ public class MainActivity extends ActionBarActivity{
                 } else {
 
                     stopService(new Intent(MainActivity.this, SampleOverlayService.class));
+                    //Stop the thread created by the service
                 }
+
+            }
+        });
+
+        seeContacts.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
             }
         });

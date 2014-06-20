@@ -21,9 +21,9 @@
         android:layout_height="wrap_content"
         android:text="Start App"
         android:id="@+id/onoffbutton"
-        android:layout_above="@+id/getgpsloc"
+        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="51dp" />
+        android:layout_marginTop="50dp" />
 
     <Button
         android:layout_width="wrap_content"
@@ -31,7 +31,17 @@
         android:text="Add Contacts"
         android:id="@+id/addcontacts"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="55dp" />
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="See Contacts"
+        android:id="@+id/seeContacts"
+        android:layout_alignBaseline="@+id/addcontacts"
+        android:layout_alignBottom="@+id/addcontacts"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>

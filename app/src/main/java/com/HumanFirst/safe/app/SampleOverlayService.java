@@ -31,6 +31,9 @@ public class SampleOverlayService extends OverlayService{
         if (overlayView != null) {
             overlayView.destory();
         }
+        //Close the thread which updates coordinates
+
+
 
     }
 
