@@ -27,9 +27,28 @@
             android:label="@string/title_activity_sos" >
         </activity>
         <activity
-            android:name="com.HumanFirst.safe.app.ContactsList"
-            android:label="@string/title_activity_contacts_list" >
+            android:name="com.HumanFirst.safe.app.ContactActivity"
+            android:label="@string/title_activity_contact" >
         </activity>
+
+        <receiver
+            android:name="com.HumanFirst.safe.app.PowerButtonReceiver"
+            android:enabled="true"
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.SCREEN_OFF" />
+                <action android:name="android.intent.action.SCREEN_ON" />
+                <action android:name="android.intent.action.ACTION_POWER_CONNECTED" />
+                <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED" />
+                <action android:name="android.intent.action.ACTION_SHUTDOWN" />
+            </intent-filter>
+        </receiver>
+
+        <service
+            android:name="com.HumanFirst.safe.app.BackgroundService"
+            android:enabled="true"
+            android:exported="true" >
+        </service>
     </application>
 
     <uses-permission android:name="android.permission.READ_CONTACTS" />

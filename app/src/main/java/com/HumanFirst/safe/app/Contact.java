@@ -14,6 +14,12 @@ public class Contact {
         this.label = label;
     }
 
+    public Contact(String name, String phone, String label) {
+        this.name = name;
+        this.phone = phone;
+        this.label = label;
+    }
+
     public Contact() {}
 
     public int getId() {
@@ -47,4 +53,6 @@ public class Contact {
     public void setLabel(String label) {
         this.label = label;
     }
+
+
 }

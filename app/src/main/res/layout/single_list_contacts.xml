@@ -14,17 +14,29 @@
             android:id="@+id/tv_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            
             android:layout_weight="1"
             android:singleLine="true"
             android:scrollHorizontally="true"
+            android:textColor="@color/body_text_event_category_headers"
             android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/tv_phonenumber"
+        
+        <ImageButton
+            android:id="@+id/delButton"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"         
-            android:ellipsize="marquee"
-            android:singleLine="true" />
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:src="@drawable/del1" />
+
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_phonenumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_text_cat"
+        android:layout_marginBottom="@dimen/events_detail_margin_header"
+        android:alpha="0.7"
+        android:textColor="@android:color/black"
+        android:textStyle="bold" />
+
 </LinearLayout>

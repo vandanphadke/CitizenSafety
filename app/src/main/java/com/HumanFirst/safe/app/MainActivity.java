@@ -1,19 +1,26 @@
 package com.HumanFirst.safe.app;
 
+import android.app.FragmentTransaction;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.hardware.Sensor;
+import android.hardware.SensorManager;
 import android.net.Uri;
 import android.provider.ContactsContract;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.Toast;
 import android.widget.ToggleButton;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class MainActivity extends ActionBarActivity{
@@ -22,10 +29,14 @@ public class MainActivity extends ActionBarActivity{
     Button addcontacts ;
     Button seeContacts ;
     ToggleButton onoff ;
-
+    DatabaseHandler db ;
 
     // GPSTracker class
     GPSTracker gps;
+
+    private SensorManager mSensorManager;
+
+    private ShakeEventListener mSensorListener;
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -42,9 +53,17 @@ public class MainActivity extends ActionBarActivity{
                         String number = c.getString(0);
                         int type = c.getInt(1);
                         String name = c.getString(2);
-                        Toast.makeText(this ,type + ":" + number + ":" + name,Toast.LENGTH_LONG).show();
+                        Toast.makeText(this ,"Contact added",Toast.LENGTH_LONG).show();
+
 
                         //Save contact to database
+                        DatabaseHandler db = new DatabaseHandler(getApplicationContext());
+
+                        ArrayList<Contact> contact_list = getListData();
+                        int id = contact_list.size();
+                        id = id + 1 ;
+                        db.addContacts(new Contact(id , name , number , ""));
+                        db.close();
 
 
                     }
@@ -55,6 +74,22 @@ public class MainActivity extends ActionBarActivity{
                 }
             }
         }
+    }
+
+    PowerButtonReceiver mReceiver ;
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mSensorManager.registerListener(mSensorListener,
+                mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER),
+                SensorManager.SENSOR_DELAY_UI);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mSensorManager.unregisterListener(mSensorListener);
     }
 
     @Override
@@ -108,12 +143,29 @@ public class MainActivity extends ActionBarActivity{
                 if (isChecked) {
                     //Code for starting background service
                     Log.d("Service", "Starting Service");
-                    startService(new Intent(MainActivity.this, SampleOverlayService.class));
+                    //startService(new Intent(MainActivity.this, SampleOverlayService.class));
+                    /*SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("OnOFF" , Context.MODE_PRIVATE);
+
+                    final SharedPreferences.Editor editor = sharedPreferences.edit();
+                    //Write these values in the sharedpreferences
+                    editor.putBoolean("Onoff" , true);*/
+                    /*IntentFilter filter = new IntentFilter(Intent.ACTION_SCREEN_ON);
+                    filter.addAction(Intent.ACTION_SCREEN_OFF);
+                    mReceiver = new PowerButtonReceiver(MainActivity.this);
+                    registerReceiver(mReceiver , filter);*/
+                    startService(new Intent(MainActivity.this, BackgroundService.class));
+
+
 
                 } else {
 
-                    stopService(new Intent(MainActivity.this, SampleOverlayService.class));
+                    //stopService(new Intent(MainActivity.this, SampleOverlayService.class));
                     //Stop the thread created by the service
+                    /*SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("OnOFF" , Context.MODE_PRIVATE);
+                    final SharedPreferences.Editor editor = sharedPreferences.edit();
+                    //Write these values in the sharedpreferences
+                    editor.putBoolean("Onoff" , false);*/
+                    stopService(new Intent(MainActivity.this, BackgroundService.class));
                 }
 
             }
@@ -123,26 +175,35 @@ public class MainActivity extends ActionBarActivity{
             @Override
             public void onClick(View v) {
 
+                Intent intent = new Intent(MainActivity.this , ContactActivity.class);
+                startActivity(intent);
+
+            }
+        });
+
+        mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+        mSensorListener = new ShakeEventListener();
+
+        mSensorListener.setOnShakeListener(new ShakeEventListener.OnShakeListener() {
+
+            public void onShake() {
+                Toast.makeText(MainActivity.this, "Shake!", Toast.LENGTH_SHORT).show();
             }
         });
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
+    private ArrayList<Contact> getListData() {
+        // TODO Auto-generated method stub
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
+        db = new DatabaseHandler(getApplicationContext());
+
+        ArrayList<Contact> results = new ArrayList<Contact>();
+        results.clear();
+        List<Contact> contacts = db.getAllContacts();
+
+        for (Contact cnt : contacts)
+            results.add(cnt);
+
+        return results;
     }
 }

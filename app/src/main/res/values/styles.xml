@@ -5,4 +5,11 @@
         <!-- Customize your theme here. -->
     </style>
 
+    <style name="TextHeaderSubForUpdates">
+        <item name="android:textSize">10sp</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textColor">@color/body_text_2</item>
+    </style>
+
+
 </resources>

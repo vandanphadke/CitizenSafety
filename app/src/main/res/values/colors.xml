@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="sliding_pane_content_fade">#cceeeeee</color>
+ 
+    <color name="body_text_1">#ff000000</color>
+    <color name="body_text_2">#77000000</color>
+    
+     <color name="accent_1">#ff4d90fe</color>
+     <color name="body_text_event_category_headers">#006094</color>
+     <color name="header_text_events">#001285</color>
+</resources>

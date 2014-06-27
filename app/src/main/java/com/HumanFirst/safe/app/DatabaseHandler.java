@@ -26,14 +26,14 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     //Table Columns names
     private static final String KEY_ID = "id";
-    private static final String KEY_NAME = "";
-    private static final String KEY_PHONE = "";
-    private static final String KEY_LABEL = "";
+    private static final String KEY_NAME = "name";
+    private static final String KEY_PHONE = "phone";
+    private static final String KEY_LABEL = "label";
 
 
 
-    public DatabaseHandler(Context context, SQLiteDatabase.CursorFactory factory, int version) {
-        super(context, DATABASE_NAME, factory, version);
+    public DatabaseHandler(Context context) {
+        super(context, DATABASE_NAME, null , DATABASE_VERSION);
     }
 
     @Override
@@ -85,6 +85,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
         Contact contact = new Contact(Integer.parseInt(cursor.getString(0)),
                 cursor.getString(1), cursor.getString(2) , cursor.getString(3));
+        cursor.close();
+        db.close();
         return contact;
 
     }
