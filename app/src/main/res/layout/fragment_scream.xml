@@ -11,8 +11,9 @@
         android:layout_height="wrap_content"
         android:text="SCREAM"
         android:id="@+id/startApp"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="63dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -24,5 +25,13 @@
         android:layout_marginBottom="56dp"
         android:layout_marginLeft="30dp"
         />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/superman" />
 
 </RelativeLayout>
