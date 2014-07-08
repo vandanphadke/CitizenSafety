@@ -80,7 +80,7 @@ public class SampleOverlayView extends OverlayView{
                     //Also call the same handler here
                     Log.v("Updating Coordinates" , "Updating Coordinates");
                     // create class object
-                    gps = new GPSTracker(getContext());
+                    gps = new GPSTracker(getContext() , 0);
 
                     // check if GPS enabled
                     if (!gps.canGetLocation()) {

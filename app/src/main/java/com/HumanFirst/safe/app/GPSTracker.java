@@ -30,6 +30,8 @@ public class GPSTracker extends Service implements LocationListener {
 	double latitude; // latitude
 	double longitude; // longitude
 
+    int i ;
+
 	// The minimum distance to change Updates in meters
 	private static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 10; // 10 meters
 
@@ -39,7 +41,8 @@ public class GPSTracker extends Service implements LocationListener {
 	// Declaring a Location Manager
 	protected LocationManager locationManager;
 
-	public GPSTracker(Context context) {
+	public GPSTracker(Context context , int i) {
+        this.i = i ;
 		this.mContext = context;
 		getLocation();
 	}
@@ -156,7 +159,7 @@ public class GPSTracker extends Service implements LocationListener {
         alertDialog.setTitle("GPS is settings");
  
         // Setting Dialog Message
-        alertDialog.setMessage("GPS is not enabled. Do you want to go to settings menu?");
+        alertDialog.setMessage("GPS is not enabled. It needs to be enabled for this service to be functional . Do you want to go to settings menu?");
  
         // On pressing Settings button
         alertDialog.setPositiveButton("Settings", new DialogInterface.OnClickListener() {
@@ -179,6 +182,15 @@ public class GPSTracker extends Service implements LocationListener {
 
 	@Override
 	public void onLocationChanged(Location location) {
+
+        //Check if the SOS Activity has been called
+        //If it is then update the Location when there is a significant change
+        //Save to Shared Preferences if significant change
+        if (i == 1){
+
+
+
+        }
 	}
 
 	@Override

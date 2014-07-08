@@ -41,11 +41,12 @@ public class PowerButtonReceiver extends BroadcastReceiver {
 
 
 
-            if (countPowerOff == 3) {
+            if (countPowerOff == 4) {
                 uptime = System.currentTimeMillis();
 
-                if (uptime - lastDown <= 4000)
-                    Log.d("Power Button", "Pressed 3 times ");
+                if (uptime - lastDown <= 5000)
+                    Log.d("Power Button", "Pressed 4 times ");
+                    Log.d("Emergency Detected", "Emergency Detected");
                     countPowerOff = 0 ;
             }
 

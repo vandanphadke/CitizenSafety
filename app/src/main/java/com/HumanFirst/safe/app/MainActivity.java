@@ -31,6 +31,8 @@ public class MainActivity extends ActionBarActivity{
     ToggleButton onoff ;
     DatabaseHandler db ;
 
+    static int shakeCount ;
+
     // GPSTracker class
     GPSTracker gps;
 
@@ -103,6 +105,11 @@ public class MainActivity extends ActionBarActivity{
         seeContacts = (Button)findViewById(R.id.seeContacts);
 
 
+
+        gps = new GPSTracker(MainActivity.this , 0);
+
+        shakeCount = 0 ;
+
         addcontacts.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -118,7 +125,7 @@ public class MainActivity extends ActionBarActivity{
 
                 Log.d("GPS", "Getting coordinates");
                 // create class object
-                gps = new GPSTracker(MainActivity.this);
+
 
                 // check if GPS enabled
                 if (gps.canGetLocation()) {
@@ -153,7 +160,13 @@ public class MainActivity extends ActionBarActivity{
                     filter.addAction(Intent.ACTION_SCREEN_OFF);
                     mReceiver = new PowerButtonReceiver(MainActivity.this);
                     registerReceiver(mReceiver , filter);*/
-                    startService(new Intent(MainActivity.this, BackgroundService.class));
+
+                    //Before starting check if GPS is on , if it is not start that intent
+                    if (!gps.canGetLocation())
+                        gps.showSettingsAlert();
+
+                    else
+                        startService(new Intent(MainActivity.this, BackgroundService.class));
 
 
 
@@ -175,19 +188,36 @@ public class MainActivity extends ActionBarActivity{
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(MainActivity.this , ContactActivity.class);
-                startActivity(intent);
+                /*Intent intent = new Intent(MainActivity.this , ContactActivity.class);
+                startActivity(intent);*/
 
             }
         });
 
-        mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         mSensorListener = new ShakeEventListener();
+        mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+       // mSensorListener = new ShakeEventListener();
+
+        final long[] firstpresstime = new long[1];
+        final long[] thirdpresstime = new long[1];
 
         mSensorListener.setOnShakeListener(new ShakeEventListener.OnShakeListener() {
 
             public void onShake() {
                 Toast.makeText(MainActivity.this, "Shake!", Toast.LENGTH_SHORT).show();
+                shakeCount++ ;
+                if(shakeCount == 1 ) {
+                    firstpresstime[0] = System.currentTimeMillis();
+                    Log.d("First shake detected","" + firstpresstime);
+                    }
+                if (shakeCount == 2){
+                    thirdpresstime[0] = System.currentTimeMillis();
+                    if (thirdpresstime[0] - firstpresstime[0] <= 5000)
+                        Toast.makeText(getApplicationContext(), "Emergency Detected", Toast.LENGTH_SHORT);
+                        Log.d("Second shake detected","" + thirdpresstime);
+                        Log.d("Emergency Detected","Emergency Detected");
+                    shakeCount = 0 ;
+                }
             }
         });
     }
