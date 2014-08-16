@@ -65,7 +65,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put(KEY_ID, contact.getId());
         values.put(KEY_NAME , contact.getName());
         values.put(KEY_PHONE, contact.getPhone());
-        values.put(KEY_LABEL, contact.getLabel());
 
 
         // Inserting Row
@@ -84,7 +83,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             cursor.moveToFirst();
 
         Contact contact = new Contact(Integer.parseInt(cursor.getString(0)),
-                cursor.getString(1), cursor.getString(2) , cursor.getString(3));
+                cursor.getString(1), cursor.getString(2));
         cursor.close();
         db.close();
         return contact;
@@ -106,7 +105,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 contact.setId(Integer.parseInt(cursor.getString(0)));
                 contact.setName(cursor.getString(1));
                 contact.setPhone(cursor.getString(2));
-                contact.setLabel(cursor.getString(3));
                 // Adding contact to list
                 contacts.add(contact);
             } while (cursor.moveToNext());
@@ -125,7 +123,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
         values.put(KEY_NAME, contact.getName());
         values.put(KEY_PHONE, contact.getPhone());
-        values.put(KEY_LABEL, contact.getLabel());
 
         // updating row
         return db.update(TABLE_NAME, values, KEY_ID + " = ?",

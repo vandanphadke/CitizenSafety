@@ -2,6 +2,8 @@ package com.HumanFirst.safe.app;
 
 import android.content.Context;
 import android.content.Intent;
+import android.location.Criteria;
+import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -49,13 +51,6 @@ public class ScreamFragment extends Fragment {
                             .isProviderEnabled(LocationManager.GPS_PROVIDER);
 
                     if (isGpsOn) {
-
-                       /* while( latitude[0] == 0 && longitude[0] == 0 )
-                        {
-                            //Show something here
-                            latitude[0] = gpsTracker.getLatitude();
-                            longitude[0] = gpsTracker.getLongitude();
-                        }*/
 
                         getActivity().startService(new Intent(getActivity(), BackgroundService.class));
                     }

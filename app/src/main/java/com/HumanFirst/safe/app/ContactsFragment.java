@@ -59,7 +59,7 @@ public class ContactsFragment extends ListFragment {
                         ArrayList<Contact> contact_list = getListData();
                         int id = contact_list.size();
                         id = id + 2 ;
-                        db.addContacts(new Contact(id , name1 , number , ""));
+                        db.addContacts(new Contact(id , name1 , number));
 
                         db.close();
                     }

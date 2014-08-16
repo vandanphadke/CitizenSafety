@@ -70,6 +70,7 @@ public class ContactCustomList extends BaseAdapter {
                 holder.txtViewPhone = (TextView) convertView.findViewById(R.id.tv_phonenumber);
                 holder.delButton = (ImageButton) convertView.findViewById(R.id.delButton);
                 convertView.setTag(holder);
+
             }
 
             else

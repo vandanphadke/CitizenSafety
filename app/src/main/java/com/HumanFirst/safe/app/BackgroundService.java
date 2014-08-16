@@ -103,16 +103,6 @@ public class BackgroundService extends Service {
                 gps = new GPSTracker(getApplicationContext() , 0);
 
                 // check if GPS enabled
-                if (!gps.canGetLocation()) {
-                    /*
-                    can't get location
-                    GPS or Network is not enabled
-                    Here GPS settings have to be turned on programatically and then the location has to be taken
-                    No permission to enable GPS by 3rd party apps
-                    So prompt user while starting the service to turn the GPS on
-                    */
-
-                }
 
                 //Check if the current latitudes and longitudes are obtained correctly(Non-Zero)
                 double latitude = 0 ;

@@ -3,10 +3,14 @@ package com.HumanFirst.safe.app;
 import android.os.Handler;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.telephony.SmsManager;
 import android.util.Log;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /*
 
@@ -26,8 +30,10 @@ public class SOSActivity extends ActionBarActivity {
     double longitude;
 
     String MapUrl ;
-
+    List<Contact> sendContacts ;
     EditText tvtest ;
+
+    DatabaseHandler db ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +43,10 @@ public class SOSActivity extends ActionBarActivity {
         tvtest = (EditText)findViewById(R.id.tvtest);
 
         gpsTracker = new GPSTracker(getApplicationContext() , 1);
+        db = new DatabaseHandler(getApplicationContext());
+
+        //Populate contacts list
+        sendContacts  = db.getAllContacts();
 
         latitude = gpsTracker.getLatitude();
         longitude = gpsTracker.getLongitude();
@@ -67,11 +77,18 @@ public class SOSActivity extends ActionBarActivity {
         @Override
         public void run() {
             try {
-                //Write the code to send a message and a mail after every 10 minutes
 
+                for (Contact c : sendContacts) {
+                    //Loop through all the contacts
 
+                    //Write the code to send a message and a mail after every 10 minutes
+                    /*SmsManager smsManager = SmsManager.getDefault();
 
+                    smsManager.sendTextMessage("Phone numbers here", null, "I am in danger , \n Click to see my location on google maps " +
+                            "\n" +
+                            MapUrl, null, null);*/
 
+                }
                 handler.postDelayed(this , 10000);
 
             }catch (Exception e){e.printStackTrace();}

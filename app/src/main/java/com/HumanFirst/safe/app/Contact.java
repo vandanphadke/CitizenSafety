@@ -4,20 +4,18 @@ package com.HumanFirst.safe.app;
  * Created by Vandan on 06-06-2014.
  */
 public class Contact {
-    public String name , phone , label ;
+    public String name , phone;
     public int id ;
 
-    public Contact(int id, String name, String phone, String label) {
+    public Contact(int id, String name, String phone) {
         this.id = id;
         this.name = name;
         this.phone = phone;
-        this.label = label;
     }
 
-    public Contact(String name, String phone, String label) {
+    public Contact(String name, String phone) {
         this.name = name;
         this.phone = phone;
-        this.label = label;
     }
 
     public Contact() {}
@@ -45,14 +43,5 @@ public class Contact {
     public void setPhone(String phone) {
         this.phone = phone;
     }
-
-    public String getLabel() {
-        return label;
-    }
-
-    public void setLabel(String label) {
-        this.label = label;
-    }
-
 
 }

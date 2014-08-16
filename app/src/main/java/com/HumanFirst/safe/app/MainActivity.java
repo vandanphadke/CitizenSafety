@@ -64,7 +64,7 @@ public class MainActivity extends ActionBarActivity{
                         ArrayList<Contact> contact_list = getListData();
                         int id = contact_list.size();
                         id = id + 1 ;
-                        db.addContacts(new Contact(id , name , number , ""));
+                        db.addContacts(new Contact(id , name , number));
                         db.close();
 
 
