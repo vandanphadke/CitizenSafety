@@ -44,6 +44,7 @@ public class FrontScreen extends FragmentActivity implements ActionBar.TabListen
 
         // Initilization
         viewPager = (ViewPager) findViewById(R.id.pager);
+        viewPager.setPageTransformer(true , new DepthPageTransformer());
         actionBar = getActionBar();
         mAdapter = new TabsPagerAdapter(getSupportFragmentManager());
 

@@ -29,12 +29,6 @@ public class PowerButtonReceiver extends BroadcastReceiver {
         if (countPowerOff == 0 )
             lastDown = System.currentTimeMillis();
 
-        /*SharedPreferences sharedPreferences = context.getSharedPreferences("OnOFF", Context.MODE_PRIVATE);
-        final SharedPreferences.Editor editor = sharedPreferences.edit();
-        //Write these values in the sharedpreferences
-        boolean receiveronoff = sharedPreferences.getBoolean("Onoff", true);
-
-        if (receiveronoff) {*/
 
             if (intent.getAction().equals(Intent.ACTION_SCREEN_OFF ) || intent.getAction().equals(Intent.ACTION_SCREEN_ON) )
                 countPowerOff++;

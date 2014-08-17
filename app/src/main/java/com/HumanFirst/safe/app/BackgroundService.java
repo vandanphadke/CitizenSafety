@@ -65,7 +65,8 @@ public class BackgroundService extends Service {
                 }
 
             }
-        });
+        }).start();
+
         mSensorListener.setOnShakeListener(new ShakeEventListener.OnShakeListener() {
 
             public void onShake() {
@@ -129,6 +130,7 @@ public class BackgroundService extends Service {
                 editor.putFloat("GPS-long" , (float) longitude);
                 
                 Log.d("Sharedprefs updated" , "" + latitude + longitude);
+                Toast.makeText(getApplicationContext() , "" + latitude + longitude , Toast.LENGTH_SHORT ).show();
 
                 handler.postDelayed(this , 10000);
 
