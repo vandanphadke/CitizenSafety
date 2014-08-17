@@ -1,9 +1,11 @@
 package com.HumanFirst.safe.app;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.location.Criteria;
 import android.location.Location;
+import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -26,12 +28,15 @@ public class ScreamFragment extends Fragment {
 
     GPSTracker gpsTracker ;
 
+    /*ProgressDialog progressDialog ;*/
+
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        final double[] latitude = {0};
+        /*final double[] latitude = {0};
         final double[] longitude = {0};
+        final LocListener[] locationListener = new LocListener[1];*/
 
         startApp = (ToggleButton)  getActivity().findViewById(R.id.startApp);
 
@@ -51,7 +56,6 @@ public class ScreamFragment extends Fragment {
                             .isProviderEnabled(LocationManager.GPS_PROVIDER);
 
                     if (isGpsOn) {
-
                         getActivity().startService(new Intent(getActivity(), BackgroundService.class));
                     }
                     else {

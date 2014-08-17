@@ -53,6 +53,19 @@ public class BackgroundService extends Service {
         final long[] firstpresstime = new long[1];
         final long[] thirdpresstime = new long[1];
 
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Log.d("Waiting" , "Waiting");
+                    Thread.sleep(20000);
+                    Log.d("20secs over" , "20secs over");
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        });
         mSensorListener.setOnShakeListener(new ShakeEventListener.OnShakeListener() {
 
             public void onShake() {
@@ -108,13 +121,9 @@ public class BackgroundService extends Service {
                 double latitude = 0 ;
                 double longitude = 0 ;
 
-                while (latitude == 0 && longitude == 0 ) {
+                latitude = gps.getLatitude();
+                longitude = gps.getLongitude();
 
-                    latitude = gps.getLatitude();
-                    longitude = gps.getLongitude();
-                    Log.d("App" , "Still in loop");
-
-                }
                 //Write these values in the sharedpreferences
                 editor.putFloat("GPS-lat" , (float) latitude);
                 editor.putFloat("GPS-long" , (float) longitude);
