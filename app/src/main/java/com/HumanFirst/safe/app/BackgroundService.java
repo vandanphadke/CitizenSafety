@@ -65,7 +65,7 @@ public class BackgroundService extends Service {
                 }
 
             }
-        }).start();
+        });
 
         mSensorListener.setOnShakeListener(new ShakeEventListener.OnShakeListener() {
 
@@ -99,10 +99,11 @@ public class BackgroundService extends Service {
         SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("GPS-Coordinates" , Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
 
-        gps = new GPSTracker(getApplicationContext() , 0);
+        gps = new GPSTracker(BackgroundService.this , 0);
 
         handler = new Handler();
         handler.postDelayed(call , 10000);
+
     }
 
     final Runnable call = new Runnable() {
@@ -130,7 +131,6 @@ public class BackgroundService extends Service {
                 editor.putFloat("GPS-long" , (float) longitude);
                 
                 Log.d("Sharedprefs updated" , "" + latitude + longitude);
-                Toast.makeText(getApplicationContext() , "" + latitude + longitude , Toast.LENGTH_SHORT ).show();
 
                 handler.postDelayed(this , 10000);
 

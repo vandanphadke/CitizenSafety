@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Theme.Screamertheme">8
+        @drawable/selectable_background_screamertheme
+        @style/ActionBarTabStyle.Screamertheme
+        @style/DropDownNav.Screamertheme
+        @style/ActionBar.Solid.Screamertheme
+        @drawable/cab_background_top_screamertheme
+        @drawable/cab_background_bottom_screamertheme
+        @style/ActionButton.CloseMode.Screamertheme
+    </style>
+</resources>

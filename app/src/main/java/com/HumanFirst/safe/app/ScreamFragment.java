@@ -34,9 +34,6 @@ public class ScreamFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        /*final double[] latitude = {0};
-        final double[] longitude = {0};
-        final LocListener[] locationListener = new LocListener[1];*/
 
         startApp = (ToggleButton)  getActivity().findViewById(R.id.startApp);
 

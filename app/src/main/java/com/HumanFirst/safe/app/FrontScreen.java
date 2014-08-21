@@ -5,6 +5,8 @@ import android.app.ActionBar;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -46,6 +48,10 @@ public class FrontScreen extends FragmentActivity implements ActionBar.TabListen
         viewPager = (ViewPager) findViewById(R.id.pager);
         viewPager.setPageTransformer(true , new DepthPageTransformer());
         actionBar = getActionBar();
+        actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#660066")));
+
+
+        //Colors of tab must be set to #F1C40F
         mAdapter = new TabsPagerAdapter(getSupportFragmentManager());
 
         viewPager.setAdapter(mAdapter);
