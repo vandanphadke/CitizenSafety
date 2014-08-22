@@ -88,14 +88,14 @@ public class ContactCustomList extends BaseAdapter {
                 @Override
                 public void onClick(View v) {
                     Log.d("Position clicked " , "" + position);
-                    String name1 = name[position];
+                    String phone1 = phone_number[position];
                    
 
                     List<Contact> allContacts = db.getAllContacts();
 
                     for (Contact c : allContacts)
                     {
-                        if (c.getName().equals(name1))
+                        if (c.getPhone().equals(phone1))
                             db.deleteContact(c);
                     }
 

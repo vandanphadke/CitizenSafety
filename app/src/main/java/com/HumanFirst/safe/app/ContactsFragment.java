@@ -33,7 +33,6 @@ public class ContactsFragment extends ListFragment {
 
     NotificationManager mNotificationManager;
 
-    Button test ;
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -97,18 +96,7 @@ public class ContactsFragment extends ListFragment {
         contact_list = new ArrayList<Contact>();
         contact_list = getListData();
 
-        test = (Button)getActivity().findViewById(R.id.test);
 
-        test.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_PICK);
-                intent.setType(ContactsContract.CommonDataKinds.Phone.CONTENT_TYPE);
-                startActivityForResult(intent, 1);
-            }
-        });
-
-        db = new DatabaseHandler(getActivity().getApplicationContext());
 
         //Clear notification when fragment started
         mNotificationManager = (NotificationManager)getActivity().getApplication() .getSystemService(Context.NOTIFICATION_SERVICE);
@@ -119,7 +107,6 @@ public class ContactsFragment extends ListFragment {
         name = new String[contact_list.size()];
         phonenumber = new String[contact_list.size()];
 
-        list = db.getAllContacts();
 
         int i = 0;
 
@@ -139,56 +126,6 @@ public class ContactsFragment extends ListFragment {
 
         setListAdapter(adapter);
     }
-
-    /*@Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        contact_list = new ArrayList<Contact>();
-        contact_list = getListData();
-
-        test = (Button)getActivity().findViewById(R.id.test);
-
-        test.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_PICK);
-                intent.setType(ContactsContract.CommonDataKinds.Phone.CONTENT_TYPE);
-                startActivityForResult(intent, 1);
-            }
-        });
-
-        db = new DatabaseHandler(getActivity().getApplicationContext());
-
-        //Clear notification when fragment started
-        mNotificationManager = (NotificationManager)getActivity().getApplication() .getSystemService(Context.NOTIFICATION_SERVICE);
-        if (mNotificationManager!=null) {
-            mNotificationManager.cancelAll();
-        }
-
-        name = new String[contact_list.size()];
-        phonenumber = new String[contact_list.size()];
-
-        list = db.getAllContacts();
-
-        int i = 0;
-
-        for ( Contact contact : contact_list){
-
-            name[i] = contact.getName();
-            phonenumber[i] = contact.getPhone();
-            i++ ;
-
-        }
-
-        if (adapter != null) {
-            adapter.notifyDataSetChanged();
-        } else {
-            adapter = new ContactCustomList(getActivity().getApplicationContext(), name, phonenumber);
-        }
-
-        setListAdapter(adapter);
-
-    }*/
 
     @Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,

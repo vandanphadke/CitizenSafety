@@ -12,7 +12,45 @@
     </style>
 
 
+
+        <style name="Theme.Screamertheme" parent="@android:style/Theme.Holo.Light" tools:ignore="NewApi">
+            <item name="android:actionBarItemBackground" tools:ignore="NewApi">@drawable/selectable_background_screamertheme</item>
+            <item name="android:popupMenuStyle" tools:ignore="NewApi">@style/PopupMenu.Screamertheme</item>
+            <item name="android:actionBarTabStyle" tools:ignore="NewApi">@style/ActionBarTabStyle.Screamertheme</item>
+
+            <item name="android:actionBarStyle" tools:ignore="NewApi">@style/ActionBar.Solid.Screamertheme</item>
+            <item name="android:actionModeBackground">@drawable/cab_background_top_screamertheme</item>
+            <item name="android:actionModeSplitBackground">@drawable/cab_background_bottom_screamertheme</item>
+            <item name="android:actionModeCloseButtonStyle">@style/ActionButton.CloseMode.Screamertheme</item>
+
+
+        </style>
+
+        <style name="ActionBar.Solid.Screamertheme" parent="@android:style/Widget.Holo.Light.ActionBar.Solid" tools:ignore="NewApi">
+            <item name="android:background">@drawable/ab_solid_screamertheme</item>
+            <item name="android:backgroundStacked" tools:ignore="NewApi">@drawable/ab_stacked_solid_screamertheme</item>
+            <item name="android:backgroundSplit" tools:ignore="NewApi">@drawable/ab_bottom_solid_screamertheme</item>
+        </style>
+
+        <style name="ActionBar.Transparent.Screamertheme" parent="@android:style/Widget.Holo.Light.ActionBar" tools:ignore="NewApi">
+            <item name="android:background">@drawable/ab_transparent_screamertheme</item>
+        </style>
+
+        <style name="PopupMenu.Screamertheme" parent="@android:style/Widget.Holo.Light.ListPopupWindow" tools:ignore="NewApi">
+            <item name="android:popupBackground">@drawable/menu_dropdown_panel_screamertheme</item>
+        </style>
+
+
+        <style name="ActionBarTabStyle.Screamertheme" parent="@android:style/Widget.Holo.Light.ActionBar.TabView" tools:ignore="NewApi">
+            <item name="android:background">@drawable/tab_indicator_ab_screamertheme</item>
+        </style>
+
+
+        <style name="ActionButton.CloseMode.Screamertheme" parent="@android:style/Widget.Holo.Light.ActionButton.CloseMode" tools:ignore="NewApi">
+            <item name="android:background">@drawable/btn_cab_done_screamertheme</item>
+        </style>
+
+
+
+
 </resources>
-
-
-
