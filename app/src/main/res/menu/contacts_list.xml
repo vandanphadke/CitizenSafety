@@ -1,18 +1,21 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:com.HumanFirst.safe.app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools" >
 
 
     <item android:id="@+id/add_contacts"
         android:title="@string/add_contacts"
         android:orderInCategory="100"
-        app:showAsAction="ifRoom"
-        android:icon="@drawable/abc_ic_menu_share_holo_dark"
-        />
+        android:visible="true"
+
+        com.HumanFirst.safe.app:showAsAction="always"
+        android:showAsAction="always"
+        android:icon="@drawable/addcontact"
+        tools:ignore="AppCompatResource" />
 
     <item android:id="@+id/action_settings"
         android:title="@string/action_settings"
         android:orderInCategory="100"
-        app:showAsAction="never" />
+        com.HumanFirst.safe.app:showAsAction="never" />
 
 </menu>
