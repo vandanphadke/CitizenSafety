@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.v4.app.ListFragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -73,15 +74,7 @@ public class ContactsFragment extends ListFragment {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.add_contacts:
-                Intent intent = new Intent(Intent.ACTION_PICK);
-                intent.setType(ContactsContract.CommonDataKinds.Phone.CONTENT_TYPE);
-                startActivityForResult(intent, 1);
-                return true ;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
+        return false ;
     }
 
     @Override
@@ -93,16 +86,16 @@ public class ContactsFragment extends ListFragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        contact_list = new ArrayList<Contact>();
-        contact_list = getListData();
-
-
 
         //Clear notification when fragment started
         mNotificationManager = (NotificationManager)getActivity().getApplication() .getSystemService(Context.NOTIFICATION_SERVICE);
         if (mNotificationManager!=null) {
             mNotificationManager.cancelAll();
         }
+
+
+        contact_list = new ArrayList<Contact>();
+        contact_list = getListData();
 
         name = new String[contact_list.size()];
         phonenumber = new String[contact_list.size()];
@@ -149,5 +142,4 @@ public class ContactsFragment extends ListFragment {
 
         return results;
     }
-
 }

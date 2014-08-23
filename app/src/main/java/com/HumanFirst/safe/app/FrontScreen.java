@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -37,6 +38,8 @@ public class FrontScreen extends FragmentActivity implements ActionBar.TabListen
 
     DatabaseHandler db ;
 
+    Intent starterIntent ;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,9 +47,11 @@ public class FrontScreen extends FragmentActivity implements ActionBar.TabListen
 
         db = new DatabaseHandler(getApplicationContext());
 
+        starterIntent = getIntent();
         // Initilization
         viewPager = (ViewPager) findViewById(R.id.pager);
         viewPager.setPageTransformer(true , new DepthPageTransformer());
+
         actionBar = getActionBar();
         actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#660066")));
 
@@ -140,6 +145,7 @@ public class FrontScreen extends FragmentActivity implements ActionBar.TabListen
                 }finally {
                     if (c != null)
                         c.close();
+                        recreate();
                 }
             }
         }
