@@ -11,8 +11,79 @@
         android:layout_height="wrap_content"
         android:text="SEND YOUR CO-ORDINATES TO YOUR LOVED ONES BY SHAKING THE PHONE"
         android:id="@+id/justtext"
-        android:layout_marginTop="54dp"
+        android:layout_marginTop="20dp"
         android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:gravity="center"
+
+        />
+
+    <ImageView
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView"
+        android:src="@drawable/help1"
+        android:layout_below="@+id/justtext"
+        android:layout_centerHorizontal="true" />
+
+    <ImageView
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView2"
+        android:src="@drawable/help2"
+        android:layout_centerVertical="true"
+        android:layout_alignLeft="@+id/imageView"
+        android:layout_alignStart="@+id/imageView" />
+
+    <ImageView
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView3"
+        android:src="@drawable/help3"
+
+        android:layout_below="@+id/textView2"
+        android:layout_alignLeft="@+id/imageView2"
+        android:layout_alignStart="@+id/imageView2" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ADD YOUR FAMILY AND FRIENDS AS GUARDIANS"
+        android:id="@+id/textView"
+        android:gravity="center"
+        android:layout_below="@+id/imageView"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TOUCH SCREAM IN NAVIGATION MENU"
+        android:id="@+id/textView2"
+        android:layout_below="@+id/imageView2"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TOUCH BUTTON TO ACTIVATE APP"
+        android:id="@+id/textView3"
+        android:gravity="center"
+        android:layout_alignBottom="@+id/imageView3"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:text="VIBRATE PHONE TWICE OR PRESS POWER BUTTON THRICE TO SEND YOUR LOCATION TO YOUR GUARDIANS"
+        android:id="@+id/textView4"
+        android:gravity="center"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/imageView3"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 

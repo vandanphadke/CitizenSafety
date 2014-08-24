@@ -6,7 +6,7 @@
     <color name="body_text_2">#77000000</color>
     
      <color name="accent_1">#ff4d90fe</color>
-     <color name="body_text_event_category_headers">#006094</color>
+     <color name="body_text_event_category_headers">#660066</color>
      <color name="header_text_events">#001285</color>
 
      <color name="tab_color">#F1C40F</color>

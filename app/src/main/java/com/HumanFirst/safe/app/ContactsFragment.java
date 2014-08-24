@@ -1,7 +1,9 @@
 package com.HumanFirst.safe.app;
 
+import android.app.AlertDialog;
 import android.app.NotificationManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
@@ -33,44 +35,6 @@ public class ContactsFragment extends ListFragment {
     DatabaseHandler db;
 
     NotificationManager mNotificationManager;
-
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if(data != null) {
-            Uri uri = data.getData();
-            if (uri != null){
-                Cursor c = null ;
-                try {
-                    c = getActivity().getContentResolver().query(uri, new String[]{ContactsContract.CommonDataKinds.Phone.NUMBER,
-                            ContactsContract.CommonDataKinds.Phone.TYPE , ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME}, null, null, null);
-
-                    if (c != null && c.moveToFirst()){
-                        String number = c.getString(0);
-                        int type = c.getInt(1);
-                        String name1 = c.getString(2);
-                        Toast.makeText(getActivity(), "Contact added", Toast.LENGTH_LONG).show();
-
-
-                        //Save contact to database
-                        DatabaseHandler db = new DatabaseHandler(getActivity().getApplicationContext());
-
-                        ArrayList<Contact> contact_list = getListData();
-                        int id = contact_list.size();
-                        id = id + 2 ;
-                        db.addContacts(new Contact(id , name1 , number));
-
-                        db.close();
-                    }
-
-                }finally {
-                    if (c != null)
-                        c.close();
-                }
-            }
-        }
-    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

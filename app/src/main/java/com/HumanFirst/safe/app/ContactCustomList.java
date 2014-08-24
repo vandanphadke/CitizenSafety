@@ -1,5 +1,6 @@
 package com.HumanFirst.safe.app;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.provider.ContactsContract;
 import android.util.Log;
@@ -87,9 +88,10 @@ public class ContactCustomList extends BaseAdapter {
             holder.delButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Log.d("Position clicked " , "" + position);
+
+
                     String phone1 = phone_number[position];
-                   
+
 
                     List<Contact> allContacts = db.getAllContacts();
 
@@ -98,6 +100,8 @@ public class ContactCustomList extends BaseAdapter {
                         if (c.getPhone().equals(phone1))
                             db.deleteContact(c);
                     }
+
+                    Toast.makeText(context , "Contact deleted successfully", Toast.LENGTH_LONG);
 
                     allContacts = db.getAllContacts();
 
@@ -124,21 +128,5 @@ public class ContactCustomList extends BaseAdapter {
             TextView txtViewPhone;
             ImageButton delButton ;
         }
-
-    private ArrayList<Contact> getListData() {
-        // TODO Auto-generated method stub
-
-        db = new DatabaseHandler(context);
-
-        ArrayList<Contact> results = new ArrayList<Contact>();
-        results.clear();
-        List<Contact> contacts = db.getAllContacts();
-
-        for (Contact cnt : contacts)
-            results.add(cnt);
-
-        return results;
-    }
-
 
 }

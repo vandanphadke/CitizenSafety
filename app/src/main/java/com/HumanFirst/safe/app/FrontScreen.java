@@ -2,7 +2,9 @@ package com.HumanFirst.safe.app;
 
 import android.annotation.TargetApi;
 import android.app.ActionBar;
+import android.app.AlertDialog;
 import android.app.FragmentTransaction;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Color;
@@ -122,30 +124,65 @@ public class FrontScreen extends FragmentActivity implements ActionBar.TabListen
                 Cursor c = null ;
                 try {
                     c = getContentResolver().query(uri, new String[]{ContactsContract.CommonDataKinds.Phone.NUMBER,
-                            ContactsContract.CommonDataKinds.Phone.TYPE, ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME}, null, null, null);
+                            ContactsContract.CommonDataKinds.Phone.TYPE , ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME}, null, null, null);
+
+                    //Save contact to database
+                    final DatabaseHandler db = new DatabaseHandler(this);
 
                     if (c != null && c.moveToFirst()){
-                        String number = c.getString(0);
+
+                        final String number = c.getString(0);
                         int type = c.getInt(1);
-                        String name1 = c.getString(2);
-                        Toast.makeText(getApplicationContext(), "Contact added", Toast.LENGTH_LONG).show();
+                        final String name1 = c.getString(2);
 
+                        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                                this);
 
-                        //Save contact to database
-                        DatabaseHandler db = new DatabaseHandler(getApplicationContext());
+                        // set title
+                        alertDialogBuilder.setTitle("Add New Contact");
 
-                        ArrayList<Contact> contact_list = getListData();
-                        int id = contact_list.size();
-                        id = id + 2 ;
-                        db.addContacts(new Contact(id , name1 , number));
+                        // set dialog message
+                        alertDialogBuilder
+                                .setMessage("Add " + name1 + " as Guardian??")
+                                .setCancelable(false)
+                                .setPositiveButton("Yes",new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog,int id) {
+                                        // if this button is clicked
 
-                        db.close();
+                                        ArrayList<Contact> contact_list = getListData();
+                                        int id1 = contact_list.size();
+                                        id1 = id1 + 2 ;
+                                        db.addContacts(new Contact(id1 , name1 , number));
+
+                                        Toast.makeText(FrontScreen.this, "Contact added", Toast.LENGTH_LONG).show();
+                                        dialog.cancel();
+                                        recreate();
+
+                                    }
+                                })
+                                .setNegativeButton("No",new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog,int id) {
+                                        // if this button is clicked, just close
+                                        // the dialog box and do nothing
+                                        dialog.cancel();
+                                        recreate();
+                                    }
+                                });
+
+                        // create alert dialog
+                        AlertDialog alertDialog = alertDialogBuilder.create();
+
+                        // show it
+                        alertDialog.show();
                     }
+
+                    db.close();
+
 
                 }finally {
                     if (c != null)
                         c.close();
-                        recreate();
+
                 }
             }
         }
