@@ -53,19 +53,6 @@ public class BackgroundService extends Service {
         final long[] firstpresstime = new long[1];
         final long[] thirdpresstime = new long[1];
 
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    Log.d("Waiting" , "Waiting");
-                    Thread.sleep(20000);
-                    Log.d("20secs over" , "20secs over");
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-
-            }
-        });
 
         mSensorListener.setOnShakeListener(new ShakeEventListener.OnShakeListener() {
 
@@ -90,6 +77,7 @@ public class BackgroundService extends Service {
                     Intent intent = new Intent(getBaseContext(),SOSActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     getApplication().startActivity(intent);
+                    stopService(new Intent(getApplicationContext() , BackgroundService.class));
 
                 }
             }
@@ -130,7 +118,7 @@ public class BackgroundService extends Service {
                 editor.putFloat("GPS-lat" , (float) latitude);
                 editor.putFloat("GPS-long" , (float) longitude);
                 
-                Log.d("Sharedprefs updated" , "" + latitude + longitude);
+                Log.d("Sharedprefs updated1" , "" + latitude + longitude);
 
                 handler.postDelayed(this , 10000);
 

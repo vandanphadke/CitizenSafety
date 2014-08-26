@@ -11,13 +11,13 @@ import android.hardware.SensorManager;
 public class ShakeEventListener implements SensorEventListener {
 
     /** Minimum movement force to consider. */
-    private static final int MIN_FORCE = 20;
+    private static final int MIN_FORCE = 30;
 
     /**
      * Minimum times in a shake gesture that the direction of movement needs to
      * change.
      */
-    private static final int MIN_DIRECTION_CHANGE = 5;
+    private static final int MIN_DIRECTION_CHANGE = 7;
 
     /** Maximum pause between movements. */
     private static final int MAX_PAUSE_BETHWEEN_DIRECTION_CHANGE = 200;

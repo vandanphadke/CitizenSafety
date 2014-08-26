@@ -34,7 +34,6 @@ public class PowerButtonReceiver extends BroadcastReceiver {
                 countPowerOff++;
 
 
-
             if (countPowerOff == 4) {
                 uptime = System.currentTimeMillis();
 
@@ -42,9 +41,13 @@ public class PowerButtonReceiver extends BroadcastReceiver {
                     Log.d("Power Button", "Pressed 4 times ");
                     Log.d("Emergency Detected", "Emergency Detected");
                     countPowerOff = 0 ;
+                    Intent i = new Intent(context , SOSActivity.class);
+                    i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    context.startActivity(i);
+                    context.stopService(new Intent(context, BackgroundService.class));
             }
 
 
-            //}
+
        }
 }

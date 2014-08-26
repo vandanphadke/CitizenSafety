@@ -31,6 +31,12 @@ public class ScreamFragment extends Fragment {
     /*ProgressDialog progressDialog ;*/
 
     @Override
+    public void onDestroy() {
+        super.onDestroy();
+        getActivity().stopService(new Intent(getActivity() , BackgroundService.class));
+    }
+
+    @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 

@@ -5,6 +5,7 @@ import android.app.Service;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -12,6 +13,7 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.provider.Settings;
 import android.util.Log;
+import android.widget.Toast;
 
 public class GPSTracker extends Service implements LocationListener {
 
@@ -30,13 +32,15 @@ public class GPSTracker extends Service implements LocationListener {
 	double latitude; // latitude
 	double longitude; // longitude
 
+    SharedPreferences.Editor editor ;
+
     int i ;
 
 	// The minimum distance to change Updates in meters
 	private static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 10; // 10 meters
 
 	// The minimum time between updates in milliseconds
-	private static final long MIN_TIME_BW_UPDATES = 1000 * 60 * 1; // 1 minute
+	private static final long MIN_TIME_BW_UPDATES = 1000 * 10 * 1; // 10 seconds
 
 	// Declaring a Location Manager
 	protected LocationManager locationManager;
@@ -186,11 +190,15 @@ public class GPSTracker extends Service implements LocationListener {
         //Check if the SOS Activity has been called
         //If it is then update the Location when there is a significant change
         //Save to Shared Preferences if significant change
-        if (i == 1){
+        //Write these values in the sharedpreferences
+        //Getting the gps ccordinates
+        /*SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("GPS-Coordinates" , Context.MODE_PRIVATE);
+        editor = sharedPreferences.edit();
 
-
-
-        }
+        editor.putFloat("GPS-lat" , (float) latitude);
+        editor.putFloat("GPS-long" , (float) longitude);
+        Log.d("Sharedprefs updated2" , "" + latitude + longitude);
+        Toast.makeText(mContext , "Lat" + latitude + "Long:"+longitude,Toast.LENGTH_SHORT ).show();*/
 	}
 
 	@Override
