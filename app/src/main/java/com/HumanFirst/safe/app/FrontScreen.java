@@ -50,6 +50,7 @@ public class FrontScreen extends FragmentActivity implements ActionBar.TabListen
         db = new DatabaseHandler(getApplicationContext());
 
         starterIntent = getIntent();
+
         // Initilization
         viewPager = (ViewPager) findViewById(R.id.pager);
         viewPager.setPageTransformer(true , new DepthPageTransformer());

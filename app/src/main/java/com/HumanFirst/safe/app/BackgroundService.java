@@ -62,15 +62,13 @@ public class BackgroundService extends Service {
 
                 if(shakeCount == 1 ) {
                     firstpresstime[0] = System.currentTimeMillis();
-                    Log.d("First shake detected","" + firstpresstime);
+
                 }
 
-                if (shakeCount == 2){
+                if (shakeCount == 3){
                     thirdpresstime[0] = System.currentTimeMillis();
                     if (thirdpresstime[0] - firstpresstime[0] <= 5000)
                         Toast.makeText(getApplicationContext(), "Emergency Detected", Toast.LENGTH_SHORT);
-                    Log.d("Second shake detected","" + thirdpresstime);
-                    Log.d("Emergency Detected","Emergency Detected");
                     shakeCount = 0 ;
                     handler.removeCallbacks(call);
 
@@ -114,11 +112,14 @@ public class BackgroundService extends Service {
                 latitude = gps.getLatitude();
                 longitude = gps.getLongitude();
 
-                //Write these values in the sharedpreferences
-                editor.putFloat("GPS-lat" , (float) latitude);
-                editor.putFloat("GPS-long" , (float) longitude);
-                
-                Log.d("Sharedprefs updated1" , "" + latitude + longitude);
+                if (latitude != 0 && longitude !=0 ) {
+
+                    //Write these values in the sharedpreferences
+                    editor.putFloat("GPS-lat", (float) latitude);
+                    editor.putFloat("GPS-long", (float) longitude);
+
+
+                }
 
                 handler.postDelayed(this , 10000);
 

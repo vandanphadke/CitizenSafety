@@ -54,7 +54,7 @@ public class ScreamFragment extends Fragment {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    Log.d("Service", "Starting Service");
+
                     isGpsOn = locationManager
                             .isProviderEnabled(LocationManager.GPS_PROVIDER);
 
@@ -68,7 +68,7 @@ public class ScreamFragment extends Fragment {
                     }
                 }
                 else {
-                    Log.d("Service", "Stopping Service");
+
                     getActivity().stopService(new Intent(getActivity() , BackgroundService.class));
                 }
             }
